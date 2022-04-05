@@ -59,6 +59,19 @@ class Finance:
     def doAutoclick(self):
         self.balance += self.autoclick_income
 
+    def doRestart(self, BalanceLabel, ClickIncomeLabel, UpdateClickIncomeButton, AutoclickIncomeLabel,
+                  UpdateAutoclickIncomeButton):
+        self.balance = 0
+        self.income_per_click = 1
+        self.income_update_price = 1
+        self.autoclick_income = 0
+        self.autoclick_update_price = 5
+        BalanceLabel['text'] = self.textgenBalanceLabel()
+        ClickIncomeLabel['text'] = self.textgenClickIncomeLabel()
+        UpdateClickIncomeButton['text'] = self.textgenUpdateClickIncomeButton()
+        AutoclickIncomeLabel['text'] = self.textgenAutoclickIncomeLabel()
+        UpdateAutoclickIncomeButton['text'] = self.textgenUpdateAutoclickIncomeButton()
+
 
 def autoclickProcessing():
     finance.doAutoclick()
@@ -116,8 +129,13 @@ UpdateAutoclickIncomeButton['command'] = partial(finance.updateAutoclickIncome, 
                                                  BalanceLabel)
 UpdateAutoclickIncomeButton.pack()
 
+RestartButton = Button(clicker_window, text="press this button to restart", width=30,
+                       command=partial(finance.doRestart, BalanceLabel, ClickIncomeLabel, UpdateClickIncomeButton,
+                                       AutoclickIncomeLabel, UpdateAutoclickIncomeButton))
+RestartButton.grid(row=2, column=0, columnspan=4)
+
 ExitButton = Button(clicker_window, text="go out from this amazing game", width=30, command=exit)
-ExitButton.grid(row=2, column=0, columnspan=4)
+ExitButton.grid(row=3, column=0, columnspan=4)
 
 clicker_window.after(1000, autoclickProcessing)
 clicker_window.after(100, buttonsStateProcessing)
