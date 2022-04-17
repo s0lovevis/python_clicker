@@ -1,6 +1,5 @@
 from tkinter import *
 from functools import partial
-import time
 
 
 class Finance:
@@ -100,6 +99,10 @@ def exit():
 finance = Finance()
 
 clicker_window = Tk()
+
+clicker_window.title("clicker game")
+
+clicker_window.resizable(width=False, height=False)
 
 BalanceLabel = Label(clicker_window, text=finance.textgenBalanceLabel(), width=30, height=3)
 BalanceLabel.grid(row=0, column=0, columnspan=4)
